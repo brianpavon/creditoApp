@@ -1,16 +1,16 @@
 <ion-header>
   <ion-toolbar color="danger" class="ion-text-center">
-    <ion-title>Carga de crédito</ion-title>
+    <ion-title>Ingreso</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
  
   <ion-row class="ion-justify-content-center ion-padding">
-    <ion-title class="ion-margin-bottom">Por favor seleccione su cuenta</ion-title>
+    <ion-title class="ion-margin-bottom" color="warning">Por favor seleccione su cuenta</ion-title>
 
-    <ion-select fill="solid" label="Cuenta" label-placement="fixed"  placeholder="Elija su cuenta" (ionChange)="cargarUsuario($event)">
-      <ion-select-option value="admin">Admin</ion-select-option>
+    <ion-select okText="Aceptar" cancelText="Cancelar" fill="solid" label="Cuenta" label-placement="fixed"  placeholder="Elija su cuenta" (ionChange)="cargarUsuario($event)">
+      <ion-select-option color="danger" value="admin">Admin</ion-select-option>
       <ion-select-option value="invitado">Invitado</ion-select-option>
       <ion-select-option value="anonimo">Anónimo</ion-select-option>
       <ion-select-option value="usuario">Usuario</ion-select-option>
@@ -23,7 +23,7 @@
     <ion-grid>
       <ion-row class="ion-justify-content-center">
 
-        <ion-input class="ion-margin-bottom ion-margin-top" fill="solid" label="Email" label-placement="floating" placeholder="Email" type="email" formControlName="email"></ion-input>
+        <ion-input class="ion-margin-bottom ion-margin-top" fill="solid" label="Correo" label-placement="floating" placeholder="Correo electrónico" type="email" formControlName="email"></ion-input>
         
 
         <ion-text *ngIf="formRegistro.controls['email'].errors?.['required'] && formRegistro.controls['email'].touched" color="danger">Debe ingresar un email</ion-text>

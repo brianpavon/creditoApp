@@ -13,10 +13,12 @@ export class AuthService {
   constructor(private auth:AngularFireAuth,private router: Router) {
     this.toast= Swal.mixin({
       toast: true,
-      position: 'bottom-start',
+      position: 'center-start',
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
+      background: '#000000',
+      color: '#ffffff'
     })
   }
 
@@ -44,7 +46,7 @@ export class AuthService {
   }
 
   logout(){    
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
     return this.auth.signOut();
   }
 

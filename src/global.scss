@@ -24,3 +24,40 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+ion-alert {
+    //background color
+    .alert-wrapper.sc-ion-alert-md {      
+      background-color: rgb(0, 68, 86);
+    }
+  
+    // Header Text
+    .alert-title.sc-ion-alert-md {
+      color: var(--ion-text-color, whitesmoke);
+    }
+  
+    // checkbox border color
+    [aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+      border-color: whitesmoke;
+    }
+  
+    checkbox or radio button color
+    .alert-radio-inner.sc-ion-alert-md {
+      background-color: whitesmoke !important;
+    }
+  
+    // wrap the text
+    .alert-radio-label.sc-ion-alert-md {
+      color: var(--ion-text-color, whitesmoke);      
+    }
+     
+    // Checked text color
+    [aria-checked="true"].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+      color: var(--ion-color-step-850, whitesmoke);
+    }
+  
+    // Button color
+    .alert-button-inner.sc-ion-alert-md {
+      color: whitesmoke;    
+    }
+  }
