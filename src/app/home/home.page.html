@@ -35,8 +35,8 @@
     <ion-button (click)="cargarCredito('2786f4877b9091dcad7f35751bfcf5d5ea712b2f')">CARGAR 100</ion-button> -->
   </div>
   
-  <ion-fab  horizontal="center" vertical="bottom" class="boton-logout">
-    <ion-fab-button color="warning" title="Cerrar sesión" (click)="cargarCredito('8c95def646b6127282ed50454b73240300dccabc')">      
+  <ion-fab horizontal="center" vertical="bottom" class="boton-logout">
+    <ion-fab-button [disabled]="noCarga" color="warning" title="Cerrar sesión" (click)="cargarCredito('8c95def646b6127282ed50454b73240300dccabc')">      
       <ion-icon name="qr-code-outline" color="dark"></ion-icon>
     </ion-fab-button>
   </ion-fab>

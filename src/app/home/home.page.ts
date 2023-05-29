@@ -11,12 +11,16 @@ import Swal from 'sweetalert2';
 export class HomePage {
   cargando : boolean = true
   usuario : any;
+  noCarga : boolean = true;
+  tope : number = 0;
   constructor(public auth : AuthService,private usuarios : DbService) {
     this.usuarios.traerUsuarios().subscribe(users => {
       //console.log(users);
       users.forEach(user => {
         if(this.auth.mailLogueado == user.correo){
           this.usuario = user;
+          this.tope = this.usuario.perfil == 'admin' ? 320 : 160;
+          this.noCarga = this.usuario.credito == this.tope;
         }
       });
     })
