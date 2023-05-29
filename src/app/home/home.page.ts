@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { DbService } from '../services/db.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -24,19 +25,22 @@ export class HomePage {
     }, 2000);
   }
 
-  cargarCredito(valor : number){
+  cargarCredito(valor : string){
     switch (valor) {
-      case 10://cambiar por el codigo qr
+      
+      case '8c95def646b6127282ed50454b73240300dccabc'://cambiar por el codigo qr
         if(this.usuario.perfil == 'admin'){
           if(this.usuario.credito10 == 2){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(true);
+            return
           }else{
             this.usuario.credito10++;
             this.usuario.credito += 10;
           }
         }else{
           if(this.usuario.credito10 == 1){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(false);
+            return
           }else{
             this.usuario.credito10++;
             this.usuario.credito += 10;
@@ -44,17 +48,19 @@ export class HomePage {
         }
         break;
 
-      case 50:
+      case 'ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ':
         if(this.usuario.perfil == 'admin'){
           if(this.usuario.credito50 == 2){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(true);
+            return
           }else{
             this.usuario.credito50++;
             this.usuario.credito += 50;
           }
         }else{
           if(this.usuario.credito50 == 1){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(false);
+            return;
           }else{
             this.usuario.credito50++;
             this.usuario.credito += 50;
@@ -62,24 +68,26 @@ export class HomePage {
         }        
         break;
 
-      case 100:
+      case '2786f4877b9091dcad7f35751bfcf5d5ea712b2f':
         if(this.usuario.perfil == 'admin'){
           if(this.usuario.credito100 == 2){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(true);
+            return;
           }else{
             this.usuario.credito100++;
             this.usuario.credito += 100;
           }
         }else{
           if(this.usuario.credito100 == 1){
-            alert('NO PODES CARGAR MAS');
+            this.cargaMaxima(false);
+            return;
           }else{
             this.usuario.credito100++;
             this.usuario.credito += 100;
           }
         }        
         break;
-    }
+    }    
     this.usuarios.actualizarUsuario(this.usuario,this.usuario.uId)
   }
 
@@ -91,4 +99,17 @@ export class HomePage {
     this.usuarios.actualizarUsuario(this.usuario,this.usuario.uId)
   }
 
+  cargaMaxima(isAdmin : boolean){    
+    Swal.fire({
+      title: 'Máxima carga alcanzada.',
+      icon: 'error',
+      text: `Solo puedes cargar ${isAdmin ? 2+' veces' : 1+' vez'} este valor.`,
+      confirmButtonText: "Aceptar",
+      confirmButtonColor: '#7e34bc',
+      background: '#000000',
+      color: '#FFFFFF',
+      heightAuto: false
+    });
+    return
+  }
 }

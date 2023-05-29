@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 export class AuthService {
   userFirebase : any;
   toast;
-  mailLogueado : any = 'anonimo@anonimo.com';
+  mailLogueado : any = '';
   constructor(private auth:AngularFireAuth,private router: Router) {
     this.toast= Swal.mixin({
       toast: true,
