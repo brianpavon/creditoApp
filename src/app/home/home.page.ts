@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { DbService } from '../services/db.service';
 import Swal from 'sweetalert2';
+import { ScannerService } from '../services/scanner.service';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,8 @@ export class HomePage {
   usuario : any;
   noCarga : boolean = true;
   tope : number = 0;
-  constructor(public auth : AuthService,private usuarios : DbService) {
+
+  constructor(public auth : AuthService,private usuarios : DbService,private scanner : ScannerService) {
     this.usuarios.traerUsuarios().subscribe(users => {
       //console.log(users);
       users.forEach(user => {
@@ -29,70 +31,74 @@ export class HomePage {
     }, 2000);
   }
 
-  cargarCredito(valor : string){
-    switch (valor) {
-      
-      case '8c95def646b6127282ed50454b73240300dccabc'://cambiar por el codigo qr
-        if(this.usuario.perfil == 'admin'){
-          if(this.usuario.credito10 == 2){
-            this.cargaMaxima(true);
-            return
+  cargarCredito(){
+    let codigo : any;
+    this.scanner.scan().then((a)=>{
+      codigo = a
+      this.scanner.stopScan();
+      switch (codigo) {      
+        case '8c95def646b6127282ed50454b73240300dccabc':
+          if(this.usuario.perfil == 'admin'){
+            if(this.usuario.credito10 == 2){
+              this.cargaMaxima(true);
+              return
+            }else{
+              this.usuario.credito10++;
+              this.usuario.credito += 10;
+            }
           }else{
-            this.usuario.credito10++;
-            this.usuario.credito += 10;
+            if(this.usuario.credito10 == 1){
+              this.cargaMaxima(false);
+              return
+            }else{
+              this.usuario.credito10++;
+              this.usuario.credito += 10;
+            }
           }
-        }else{
-          if(this.usuario.credito10 == 1){
-            this.cargaMaxima(false);
-            return
+          break;
+  
+        case 'ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ':
+          if(this.usuario.perfil == 'admin'){
+            if(this.usuario.credito50 == 2){
+              this.cargaMaxima(true);
+              return
+            }else{
+              this.usuario.credito50++;
+              this.usuario.credito += 50;
+            }
           }else{
-            this.usuario.credito10++;
-            this.usuario.credito += 10;
-          }
-        }
-        break;
-
-      case 'ae338e4e0cbb4e4bcffaf9ce5b409feb8edd5172 ':
-        if(this.usuario.perfil == 'admin'){
-          if(this.usuario.credito50 == 2){
-            this.cargaMaxima(true);
-            return
+            if(this.usuario.credito50 == 1){
+              this.cargaMaxima(false);
+              return;
+            }else{
+              this.usuario.credito50++;
+              this.usuario.credito += 50;
+            }
+          }        
+          break;
+  
+        case '2786f4877b9091dcad7f35751bfcf5d5ea712b2f':
+          if(this.usuario.perfil == 'admin'){
+            if(this.usuario.credito100 == 2){
+              this.cargaMaxima(true);
+              return;
+            }else{
+              this.usuario.credito100++;
+              this.usuario.credito += 100;
+            }
           }else{
-            this.usuario.credito50++;
-            this.usuario.credito += 50;
-          }
-        }else{
-          if(this.usuario.credito50 == 1){
-            this.cargaMaxima(false);
-            return;
-          }else{
-            this.usuario.credito50++;
-            this.usuario.credito += 50;
-          }
-        }        
-        break;
-
-      case '2786f4877b9091dcad7f35751bfcf5d5ea712b2f':
-        if(this.usuario.perfil == 'admin'){
-          if(this.usuario.credito100 == 2){
-            this.cargaMaxima(true);
-            return;
-          }else{
-            this.usuario.credito100++;
-            this.usuario.credito += 100;
-          }
-        }else{
-          if(this.usuario.credito100 == 1){
-            this.cargaMaxima(false);
-            return;
-          }else{
-            this.usuario.credito100++;
-            this.usuario.credito += 100;
-          }
-        }        
-        break;
-    }    
-    this.usuarios.actualizarUsuario(this.usuario,this.usuario.uId)
+            if(this.usuario.credito100 == 1){
+              this.cargaMaxima(false);
+              return;
+            }else{
+              this.usuario.credito100++;
+              this.usuario.credito += 100;
+            }
+          }        
+          break;
+      }    
+      this.usuarios.actualizarUsuario(this.usuario,this.usuario.uId)
+    })
   }
 
   vaciarCredito(){
