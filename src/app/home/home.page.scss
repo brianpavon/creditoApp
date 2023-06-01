@@ -35,14 +35,15 @@ ion-content{
 }
 
 .boton-numero{
-  border: 8px solid black;
+  border: 2px solid black;
   border-radius: 15px;
-  height: 100%;
+  height: 115%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #e37841;
   flex-direction: column;
+  margin-top: -50px;
 }
 
 .titulo-principal{
@@ -54,4 +55,18 @@ ion-content{
   //font-size: larger;
   margin-bottom: 25px;
   height: 50px;
+}
+
+.title-secondary{
+  font-size:x-large;
+  text-align: center;
+  margin-top: -65px;
+  //color: whitesmoke;
+}
+
+.numeros-creditos{
+  font-size:180px;
+  font-weight: bold;
+  text-align: center;
+  //color: whitesmoke;
 }

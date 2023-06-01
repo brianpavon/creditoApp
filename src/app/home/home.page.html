@@ -20,13 +20,13 @@
     </ion-button>
 
     <div class="contenedor-botones">      
+      <ion-title class="title-secondary">Total de créditos</ion-title>
       <div class="boton-numero">
-          <ion-title style="font-size:xx-large">Total de créditos</ion-title>
-          <ion-title class="ion-text-center" style="font-size:xxx-large">{{usuario.credito}}</ion-title>
+          <ion-title class="numeros-creditos">{{usuario.credito}}</ion-title>
       </div>
       
     </div>
-    <ion-button [disabled]="usuario.credito == 0" style="height: 70px;" class="ion-margin-top" color="danger" shape="round" (click)="vaciarCredito()">
+    <ion-button [disabled]="usuario.credito == 0" style="height: 50px;" class="ion-margin-top" color="danger" shape="round" (click)="vaciarCredito()">
       Borrar créditos
       <ion-icon class="ion-margin-start" name="trash"></ion-icon>        
     </ion-button>
