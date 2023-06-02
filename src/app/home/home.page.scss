@@ -55,6 +55,7 @@ ion-content{
   //font-size: larger;
   margin-bottom: 25px;
   height: 50px;
+  z-index: 999999;
 }
 
 .title-secondary{
@@ -69,4 +70,6 @@ ion-content{
   font-weight: bold;
   text-align: center;
   //color: whitesmoke;
+  padding-left: 0px;
+  padding-right: 0px;
 }
